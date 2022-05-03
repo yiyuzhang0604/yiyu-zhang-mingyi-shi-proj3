@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Add a new post</title>
+  </head>
+  <body>
+    <nav class="nav nav-masthead justify-content-center float-md-right">
+      <a class="nav-link active" aria-current="page" href="#">Home</a>
+      
+      <a class="nav-link" href="/login">Login</a>
+      <a class="nav-link" href="/register">Register</a>
+      <a class="nav-link" href="/movies/add">Add Post</a>
+      
+  </nav>
+    <div class="title">MovieMaster</div>
+    <div class="createNew-page">
+        <div class="form">
+          <form action="/movies" method="POST" class="createNew-form">
+            <h1 class="mb-4">New Travel Place</h1>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="name"
+              maxlength="50"
+              required
+            />
+            <input
+              type="text"
+              name="image"
+              id="image"
+              placeholder="image url"
+              required
+            />
+      
+            <textarea
+              class="description"
+              type="text"
+              name="description"
+              id="description"
+              placeholder="description"
+              style="width: 100%;"
+              rows="5"
+            ></textarea>
+      
+            <button>Submit</button>
+
+    
+  </body>
+</html>

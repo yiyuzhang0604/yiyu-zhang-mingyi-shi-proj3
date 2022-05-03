@@ -6,6 +6,9 @@ const flash = require("express-flash");
 const session = require("express-session");
 const methodOverride = require("method-override");
 const User = require("./models/User");
+const Movie = require("./models/Movie"); 
+//const seedDB = require("./seeds");
+
 const bcrypt = require("bcryptjs");
 const {
   checkAuthenticated,
@@ -104,6 +107,47 @@ app.delete("/logout", (req, res) => {
   req.logOut();
   res.redirect("/login");
 });
+
+
+// add new post
+app.get("/new", (req,res) => {
+  res.render("/movies/add"); 
+}); 
+
+// get all movies 
+app.get("/movies", (req, res) => {
+  Movie.find({}, function(err, allMovies) {
+    if (err) {
+      console.log(err); 
+    } else {
+      res.render("movies/index", {
+        movies: allMovies, 
+        currentUser: req.user,
+      });
+    }
+  });
+});
+
+
+// add new post to database 
+app.post("/movies", checkAuthenticated, (req, res) => {
+  var rating = req.body.rating; 
+  var description = req.body.description; 
+  let newMovie = {
+    rating: rating, 
+    author: {
+      id: req.user._id, 
+      username: req.user.username,
+    },
+  }; 
+  Movie.create(newMovie, function(err, newlyCreated) {
+    if (err) {
+      console.log(err); 
+    } else {
+      res.redirect("/movies"); 
+    }
+  });
+}); 
 
 mongoose
   .connect(
